@@ -16,8 +16,8 @@ This repository was initialized with Reponator. Before making changes, review th
 
 - theme: High contrast
 - density: Touch-friendly
-- layout: Task and form workflow
-- primarySurface: Form / task-first workspace
+- layout: Arcade gameplay workflow
+- primarySurface: Canvas flight arena
 - overlays: Inline expand / collapse
 - chrome: Custom themed titlebar and window controls
 - scrollbars: Themed scrollbars and form controls

@@ -54,16 +54,6 @@ function updateInnoVersion(filePath, version) {
   return next !== src && writeIfChanged(filePath, next);
 }
 
-function walk(dir, callback) {
-  if (!exists(dir)) return;
-  for (const item of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (item.isSymbolicLink() || ['.git', 'node_modules', 'vendor', 'third_party', '.venv', 'venv', 'dist', 'build', 'release'].includes(item.name)) continue;
-    const full = path.join(dir, item.name);
-    if (item.isDirectory()) walk(full, callback);
-    else callback(full);
-  }
-}
-
 function main() {
   const args = process.argv.slice(2);
   const requested = args[0] === '--set' ? args[1] : args[0];
@@ -80,7 +70,9 @@ function main() {
   }
 
   const touched = [];
-  walk(root, filePath => {
+  // Explicit first-party inventory: never traverse dependencies, artifacts or backups.
+  ['package.json', 'package-lock.json', 'VERSION', 'installer/stroids.iss'].forEach(target => {
+    const filePath = path.join(root, target);
     const rel = path.relative(root, filePath).replace(/\\/g, '/');
     const base = path.basename(filePath).toLowerCase();
     let changed = false;

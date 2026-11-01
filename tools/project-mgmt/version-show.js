@@ -20,23 +20,18 @@ function readTextVersion(filePath) {
   }
 }
 
-function walk(dir, callback) {
-  if (!fs.existsSync(dir)) return;
-  for (const item of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (item.isSymbolicLink() || ['.git', 'node_modules', 'vendor', 'third_party', '.venv', 'venv', 'dist', 'build', 'release'].includes(item.name)) continue;
-    const full = path.join(dir, item.name);
-    if (item.isDirectory()) walk(full, callback);
-    else callback(full);
-  }
-}
-
 const rows = [];
-walk(root, filePath => {
+['package.json', 'package-lock.json', 'VERSION', 'installer/stroids.iss'].forEach(target => {
+  const filePath = path.join(root, target);
   const rel = path.relative(root, filePath).replace(/\\/g, '/');
   const base = path.basename(filePath).toLowerCase();
   let version = null;
   if (base === 'package.json') version = readJsonVersion(filePath);
+  else if (base === 'package-lock.json') version = readJsonVersion(filePath);
   else if (base === 'version' || base === 'version.txt') version = readTextVersion(filePath);
+  else if (base.endsWith('.iss')) {
+    try { version = fs.readFileSync(filePath, 'utf8').match(/#define\s+MyAppVersion\s+"([^"]+)"/)?.[1] || null; } catch {}
+  }
   if (version) rows.push({ rel, version });
 });
 

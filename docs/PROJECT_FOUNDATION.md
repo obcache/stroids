@@ -16,8 +16,8 @@ functionality. Scaffolding these decisions does not implement an application or 
 
 - theme: High contrast
 - density: Touch-friendly
-- layout: Task and form workflow
-- primarySurface: Form / task-first workspace
+- layout: Arcade gameplay workflow (user's first functional request)
+- primarySurface: Canvas flight arena with inline help, flight log and settings
 - overlays: Inline expand / collapse
 - chrome: Custom themed titlebar and window controls
 - scrollbars: Themed scrollbars and form controls
@@ -43,13 +43,29 @@ functionality. Scaffolding these decisions does not implement an application or 
 
 - testing: Unit + integration + key workflow smoke tests
 
-## Administrator Bootstrap
+## Implemented Product
+
+STROIDS is an independent asteroid arcade homage. Original generated line-art
+sprites, an original ship mark and synthesized sound accompany momentum-based
+flight, wraparound space, rock splitting, waves, score chasing and three lives.
+The game request supersedes the creation wizard's generic form-first workspace.
+No login, administrator bootstrap, credentials, server or tray are required.
+
+Electron loads local bundled files through `stroids://app/`. The renderer is
+sandboxed with context isolation and no Node access. Named preload operations
+validate IPC senders and JSON at the main-process boundary. Network access and
+new browser windows are blocked. Fonts and art are bundled for offline use.
+
+Profiles use schema version 1 JSON in Electron's userData directory, outside
+dist/. A separate window.json records dimensions and maximize state. Browser
+preview uses localStorage instead. Import validates before showing a replacement
+confirmation; export preserves settings and the latest 100 completed runs.
+
+## Administrator Bootstrap (Not Applicable)
 
 - Initial admin username / identity: Not applicable
 - Credentials: No bootstrap password is stored.
-- Application-managed passwords must be hashed and bootstrap enrollment disabled
-  after first use. Require rotation of a supplied bootstrap password.
-- External identity uses an allowlisted subject/group; do not grant admin to arbitrary SSO users.
+- No authentication or enrollment code is present or required by this product.
 
 ## Delivery And Data Boundaries
 
@@ -63,7 +79,9 @@ are foundation preferences; feature-specific behavior comes from the user reques
 
 ## Additional User Constraints
 
-None recorded.
+- Independent respectful homage to the retro game Asteroids; no reused original
+  artwork, logos, recordings or claim of affiliation.
+- First release is Windows x64, with an unsigned per-user Inno Setup installer.
 
 ## Implementation Handoff
 

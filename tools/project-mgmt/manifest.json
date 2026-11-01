@@ -13,8 +13,8 @@
     "platform": "windows",
     "theme": "contrast",
     "density": "touch",
-    "layout": "workflow",
-    "primarySurface": "forms",
+    "layout": "arcade",
+    "primarySurface": "canvas",
     "overlays": "inline",
     "chrome": "custom",
     "scrollbars": "themed",
@@ -34,11 +34,11 @@
     "interchange": "json",
     "connectivity": "offline",
     "testing": "standard",
-    "notes": ""
+    "notes": "STROIDS independent asteroid arcade homage. User game request supersedes generic form-first scaffold; offline Windows x64, original assets and synthesized audio."
   },
   "foundationPath": "docs/PROJECT_FOUNDATION.md",
   "artifactBoundary": "dist/",
-  "migrationPolicy": "Explicit, versioned and validated when persistence is implemented.",
+  "migrationPolicy": "Profile schema 1 JSON: validate before replacement, preserve unreadable file backups. No database migrations. Unsupported schemas are rejected.",
   "layout": {
     "docs": [
       "AGENTS.md",
@@ -56,7 +56,10 @@
       "docs/PROJECT_FOUNDATION.md",
       "docs/user/UserGuide.md",
       "README.md",
-      "tools/project-mgmt/README.md"
+      "tools/project-mgmt/README.md",
+      "docs/design/visual-review.md",
+      "docs/design/prompts.md",
+      "progress.md"
     ],
     "tools": [
       "tools/project-mgmt/commit-release.js",
@@ -68,7 +71,49 @@
       "tools/project-mgmt/todo.js",
       "tools/project-mgmt/version-bump.js",
       "tools/project-mgmt/version-show.js",
-      "tools/project-mgmt/version-sync.js"
+      "tools/project-mgmt/version-sync.js",
+      "tools/build/deploy-check.js",
+      "tools/build/dev.js",
+      "tools/build/icons.js",
+      "tools/build/notices.js",
+      "tools/build/package.js"
+    ],
+    "app": [
+      "index.html",
+      "vite.config.mts",
+      "tsconfig.json",
+      "tsconfig.electron.json",
+      "src/App.tsx",
+      "src/bridge.ts",
+      "src/main.tsx",
+      "src/styles.css",
+      "src/components/GameView.tsx",
+      "src/components/Panels.tsx",
+      "src/components/ShipIcon.tsx",
+      "src/game/audio.ts",
+      "src/game/engine.ts",
+      "src/game/renderer.ts",
+      "electron/main.ts",
+      "electron/preload.ts",
+      "electron/store.ts",
+      "shared/profile.ts",
+      "installer/stroids.iss"
+    ],
+    "tests": [
+      "tests/engine.test.ts",
+      "tests/profile.test.ts",
+      "tests/versioning.test.ts",
+      "tools/testing/desktop.js",
+      "tools/testing/installer.js",
+      "tools/testing/smoke.js"
+    ],
+    "assets": [
+      "docs/design/stroids-concept.png",
+      "public/art/sprites.png",
+      "public/icon.svg",
+      "public/icon.ico",
+      "public/icon.png",
+      "public/THIRD_PARTY_NOTICES.txt"
     ]
   },
   "files": [
@@ -197,5 +242,27 @@
       "sha256": "e9dd8507f4bf0c6f42458e41aea833ad0bd3f6127272335eee9bf4d58541ed67"
     }
   ],
-  "integrityScope": "Creation-time seed hashes; excludes this manifest, local secrets and later edits."
+  "integrityScope": "Creation-time seed hashes; excludes this manifest, local secrets and later edits.",
+  "runtime": {
+    "stack": "Electron / React / Vite / TypeScript",
+    "platform": "Windows x64",
+    "electronEntry": "electron/main.ts",
+    "rendererEntry": "src/main.tsx",
+    "preloadEntry": "electron/preload.ts",
+    "offline": true,
+    "profileSchemaVersion": 1,
+    "storage": "Electron userData/profile.json; separate window.json; browser preview uses localStorage",
+    "artifactLayout": [
+      "dist/renderer",
+      "dist/desktop/STROIDS-win32-x64",
+      "dist/STROIDS-Setup-<version>.exe",
+      "dist/SHA256SUMS.txt"
+    ],
+    "versionTargets": [
+      "package.json",
+      "package-lock.json",
+      "VERSION",
+      "installer/stroids.iss"
+    ]
+  }
 }

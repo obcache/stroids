@@ -4,25 +4,29 @@ This file is the planning mechanism for active work. Keep it current enough that
 
 ## Current Objective
 
-- [ ] Define the first concrete project objective.
+- [x] Deliver STROIDS: an original, playable asteroid arcade homage for offline Windows desktop.
 
 ## Next Actions
 
-- [ ] Replace this starter checklist with actionable tasks.
-- [ ] Add acceptance criteria for the first milestone.
-- [ ] Link important decisions back to `docs/dev-ledger.md`.
-- [ ] Once the app stack is selected, update `tools/project-mgmt/version-sync.js` for stack-specific version files.
-- [ ] Review `docs/PROJECT_FOUNDATION.md` and implement the user's requested functionality within its selected environment.
-- [ ] After finalizing the structure, reconcile package.json, manifest.json and docs with the implemented layout and commands.
+- [x] Design launch/game screen and original assets.
+- [x] Implement momentum, wraparound, rock splitting, waves, scores, lives, pause and restart.
+- [x] Add keyboard/touch input, audio, JSON profile and versioned import/export.
+- [x] Build isolated Electron runtime, custom chrome, icons and Inno Setup package.
+- [x] Validate engine, persistence, core workflows, visuals and built desktop artifact.
+- [x] Reconcile foundation, manifest, docs and version tooling; run handoff.
 
 ## Backlog
 
-- [ ] Capture future ideas here until they are promoted into Current Objective or Next Actions.
+- [ ] Gamepad input and additional original game modes.
+- [ ] Release signing and public distribution after publisher/licensing decisions.
+- [ ] Human listening, physical multi-touch and native chooser/installer visual review before public release.
 
 ## Risks And Questions
 
-- [ ] List unresolved assumptions, external dependencies, and decisions needed.
+- Unsigned local Windows builds are expected for this first implementation.
+- Game-first surface supersedes the generic scaffold form workspace preference.
 
 ## Done
 
 - [x] Initial planning file created.
+- [x] First playable build, complete portable Windows app and Inno installer; details in docs/dev-ledger.md.

@@ -4,8 +4,8 @@
   "platform": "windows",
   "theme": "contrast",
   "density": "touch",
-  "layout": "workflow",
-  "primarySurface": "forms",
+  "layout": "arcade",
+  "primarySurface": "canvas",
   "overlays": "inline",
   "chrome": "custom",
   "scrollbars": "themed",
@@ -25,5 +25,5 @@
   "interchange": "json",
   "connectivity": "offline",
   "testing": "standard",
-  "notes": ""
+  "notes": "STROIDS independent asteroid arcade homage. User game request supersedes generic form-first scaffold; offline Windows x64, original assets and synthesized audio."
 }
